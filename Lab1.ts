@@ -8,11 +8,40 @@
 const symbols = ['()', '[]', '{}'];
 const inputs = ['[()]{}{[()()]()}', '[(])', '[()]{}{[({})()]()}', '[()]{}{[({})[(})]()}'];
 
-function init(): void {
+function initLab1(): void {
 
+    console.time('Execution Time');
     inputs.forEach(input => {
         correctPairs(input);
-    })
+        //validate(input);
+        //let result:boolean = validate(input);
+        //console.log(`Resultado: \n > La entrada ${input} es: ${result}`);    
+    });
+    console.timeEnd('Execution Time');
+}
+
+function isOpen(character: string): boolean {
+    return ['[', '{', '('].indexOf(character) > -1;
+}
+
+function closes(characterA: string, characterB: string): boolean {
+    let pairs: Record<string, string> = { '{': '}', '[': ']', '(': ')' };
+    return pairs[characterA] === characterB;
+}
+
+function validate(text: String): boolean {
+    let stack = [];
+    for (let character of text.split('')) {
+        if (isOpen(character)) {
+            stack.push(character);
+        } else {
+            let topChar = stack.pop();
+            if (!closes(topChar!, character)) {
+                return false;
+            }
+        }
+    }
+    return stack.length === 0;
 }
 
 function correctPairs(input: string): void {
@@ -42,7 +71,7 @@ function correctPairs(input: string): void {
         } while (hasChars);
     }
 
-    console.log(`Resultado: \n > La entrada ${input} es: ${lenght==0}`);
+    //console.log(`Resultado: \n > La entrada ${input} es: ${lenght == 0}`);
 }
 
-init();
+initLab1();

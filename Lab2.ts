@@ -12,7 +12,7 @@ const data = [0, 0, 0, 1, 1, 1, 0, 99];
 const skips = 3;
 const size = data.length;
 
-function init(): void {
+function initLab2(): void {
 
     let playing = size > 0;
     let hasSkip = true;
@@ -63,4 +63,4 @@ function printState(value: number): void {
     }
 }
 
-init();
+initLab2();
