@@ -10,14 +10,11 @@ const inputs = ['[()]{}{[()()]()}', '[(])', '[()]{}{[({})()]()}', '[()]{}{[({})[
 
 function initLab1(): void {
 
-    console.time('Execution Time');
     inputs.forEach(input => {
-        correctPairs(input);
-        //validate(input);
-        //let result:boolean = validate(input);
-        //console.log(`Resultado: \n > La entrada ${input} es: ${result}`);    
+        //correctPairs(input);
+        let result:boolean = validate(input);
+        console.log(`Resultado: \n > La entrada ${input} es: ${result}`);    
     });
-    console.timeEnd('Execution Time');
 }
 
 function isOpen(character: string): boolean {
@@ -71,7 +68,7 @@ function correctPairs(input: string): void {
         } while (hasChars);
     }
 
-    //console.log(`Resultado: \n > La entrada ${input} es: ${lenght == 0}`);
+    console.log(`Resultado: \n > La entrada ${input} es: ${lenght == 0}`);
 }
 
 initLab1();
