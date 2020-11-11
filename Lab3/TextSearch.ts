@@ -25,7 +25,7 @@ export class TextSearch {
 
 
     /**
-     * @return highlight text with prefix in brackets
+     * @return highlight text in html format
      */
     highlightText(): string {
 
