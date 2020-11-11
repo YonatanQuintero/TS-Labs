@@ -1,27 +1,27 @@
 class TextSearch {
     constructor(text, prefix) {
-            this.text = text;
-            this.prefix = prefix.toLowerCase();
-            this.result = {};
-        }
-        /**
-         * @return Map with the times that word is found in the text, using prefix
-         */
+        this.text = text;
+        this.prefix = prefix.toLowerCase();
+        this.result = {};
+    }
+    /**
+   * @return Map with the times that word is found in the text, using prefix
+   */
     search() {
-            this.normalizeText();
-            for (let character of this.split()) {
-                if (character.toLowerCase().startsWith(this.prefix)) {
-                    this.addOrUpdated(character);
-                }
+        const normalizeText = this.normalizeText();
+        for (let character of this.split(normalizeText)) {
+            if (character.toLowerCase().startsWith(this.prefix)) {
+                this.addOrUpdated(character);
             }
-            return this.result;
         }
-        /**
-         * @return highlight text in html format
-         */
+        return this.result;
+    }
+    /**
+     * @return highlight text in html format
+     */
     highlightText() {
         const builder = [];
-        const split = this.split();
+        const split = this.split(this.text);
         for (let i = 0; i < split.length; i++) {
             if (i > 0)
                 builder.push(" ");
@@ -33,10 +33,10 @@ class TextSearch {
         return builder.join("");
     }
     normalizeText() {
-        this.text = this.text.replace(/[^A-Z0-9\s]/gi, "");
+        return this.text.replace(/[^A-Z0-9\s]/gi, "");
     }
-    split() {
-        return this.text.split(/\s/gi);
+    split(value) {
+        return value.split(/\s/gi);
     }
     addOrUpdated(character) {
         let value = 1;
@@ -56,7 +56,6 @@ class TextSearch {
         return auxBuilder.join("");
     }
 }
-
 function test() {
     const text = "Until recently, the prevailing view assumed lorem ipsum was born as a nonsense text. “It's not Latin, though it looks like it, and it actually says nothing,” Before & After magazine answered a curious reader, “Its ‘words’ loosely approximate the frequency with which letters occur in English, which is why at a glance it looks pretty real.”";
     const prefix = "LO";

@@ -14,8 +14,8 @@ class TextSearch {
    * @return Map with the times that word is found in the text, using prefix
    */
     search(): Record<string, number> {
-        this.normalizeText();
-        for (let character of this.split()) {
+        const normalizeText = this.normalizeText();
+        for (let character of this.split(normalizeText)) {
             if (character.toLowerCase().startsWith(this.prefix)) {
                 this.addOrUpdated(character);
             }
@@ -30,7 +30,7 @@ class TextSearch {
     highlightText(): string {
 
         const builder = [];
-        const split = this.split();
+        const split = this.split(this.text);
 
         for (let i = 0; i < split.length; i++) {
             if (i > 0) builder.push(" ");
@@ -44,12 +44,12 @@ class TextSearch {
         return builder.join("");
     }
 
-    private normalizeText(): void {
-        this.text = this.text.replace(/[^A-Z0-9\s]/gi, "");
+    private normalizeText(): string {
+        return this.text.replace(/[^A-Z0-9\s]/gi, "");
     }
 
-    private split(): Array<string> {
-        return this.text.split(/\s/gi);
+    private split(value:string): Array<string> {
+        return value.split(/\s/gi);
     }
 
     private addOrUpdated(character: string) {
